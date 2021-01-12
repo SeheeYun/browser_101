@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinates</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .target {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .target > img {
+        width: 100%;
+      }
+      .target > .span {
+        text-align: right;
+        width: 200px;
+        position: absolute;
+        left: -30px;
+        bottom: 10px;
+      }
+      .target::before {
+        content: "";
+        width: 300vw;
+        height: 1px;
+        background-color: white;
+        position: absolute;
+        left: -150vw;
+        top: 50px;
+      }
+      .target::after {
+        content: "";
+        width: 1px;
+        height: 300vw;
+        background-color: white;
+        position: absolute;
+        left: 50px;
+        top: -150vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="target">
+      <img src="coordinates/img/target.png" alt="no" />
+      <span style="color: white" class="span"></span>
+    </div>
+    <script>
+      const target = document.querySelector(".target");
+      const span = document.querySelector(".span");
+
+      function target_coord(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        target.style.left = `${x - 50}px`;
+        target.style.top = `${y - 50}px`;
+        span.innerHTML = `${x}px, ${y}px`;
+      }
+
+      document.addEventListener("mousemove", target_coord);
+    </script>
+  </body>
+</html>

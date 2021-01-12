@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window size</title>
+    <style>
+      .tag {
+        background-color: #a683bb;
+        list-style: none;
+        padding: 20px;
+        display: inline-block;
+        height: 120vh;
+      }
+      * {
+        font-size: x-large;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tag"></div>
+    <script>
+      const tag_span = document.querySelector(".tag");
+
+      function updateTag() {
+        tag_span.innerHTML = `
+        window.screen: ${window.screen.width},${window.screen.height}<br />
+        window.outer: ${window.outerWidth},${window.outerHeight}<br />
+        window.inner: ${window.innerWidth},${window.innerHeight}<br />
+        documentElement.clientWidth: ${document.documentElement.clientWidth},${document.documentElement.clientHeight}
+        `;
+      }
+
+      updateTag(); //괄호를 쓰지않으면 함수만! 불러옴, 괄호를 넣으면 함수를 돌리고난 값이 출력됨
+
+      window.addEventListener("resize", () => updateTag());
+    </script>
+  </body>
+</html>

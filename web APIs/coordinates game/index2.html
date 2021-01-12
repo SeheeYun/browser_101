@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinates2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: black;
+      }
+      .target {
+        position: absolute;
+      }
+      .target > img {
+        transform: translate(-50%, -50%);
+      } /* 트렌스폼으로 위치말고 요소 자체의 위치를 바꿀수있음!, 정말 중요하다 */
+      /* CRP를 적용하면 position을 바꾸는것보다 transfrom으로 바꾸는게 좋다! */
+      .target > .span {
+        color: white;
+        display: block;
+        transform: translate(20px, -100px);
+      }
+      .vertical {
+        width: 1px;
+        height: 100%;
+        background-color: white;
+        position: absolute;
+      }
+      .horizontal {
+        width: 100%;
+        height: 1px;
+        background-color: white;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="target">
+      <img src="coordinates/img/target.png" alt="no" />
+      <span class="span"></span>
+    </div>
+    <div class="vertical"></div>
+    <div class="horizontal"></div>
+    <script>
+      const target = document.querySelector(".target");
+      const span = document.querySelector(".span");
+      const vertical = document.querySelector(".vertical");
+      const horizontal = document.querySelector(".horizontal");
+
+      function target_coord(e) {
+        const x = e.clientX;
+        const y = e.clientY;
+        target.style.transform = `translate(${x}px,${y}px)`;
+        vertical.style.transform = `translateX(${x}px)`;
+        horizontal.style.transform = `translateY(${y}px)`;
+        span.innerHTML = `${x}px, ${y}px`;
+      }
+
+      document.addEventListener("mousemove", target_coord);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window coordinates</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: black;
+      }
+      div {
+        background-color: beige;
+        width: 200px;
+        height: 200px;
+        margin: 5px;
+        border-radius: 5px;
+      }
+      .box {
+        background-color: coral;
+      }
+      aside {
+        position: fixed;
+        right: 5px;
+        top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="box"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <aside>
+      <button class="scrollby">Scroll by 100px(y)</button>
+      <button class="scrollto">Scroll to 100px(y)</button>
+      <button class="scrollbox">Scroll into box</button>
+    </aside>
+    <script>
+      // coordinates
+      const box = document.querySelector(".box");
+      box.addEventListener("click", clientx);
+
+      function clientx(e) {
+        console.log(box.getBoundingClientRect());
+        console.log(
+          `client: ${e.clientX}, ${e.clientY}
+page: ${e.pageX}, ${e.pageY}`
+        );
+      }
+
+      // scrolling
+      const scrollby = document.querySelector(".scrollby");
+      const scrollto = document.querySelector(".scrollto");
+      const scrollbox = document.querySelector(".scrollbox");
+
+      scrollby.addEventListener("click", () => {
+        window.scrollBy({
+          top: 100,
+          behavior: "smooth",
+        });
+      });
+      scrollto.addEventListener("click", () => {
+        window.scrollTo({
+          top: 100,
+          behavior: "smooth",
+        });
+      });
+      scrollbox.addEventListener("click", () => {
+        box.scrollIntoView({ behavior: "auto" });
+      });
+    </script>
+  </body>
+</html>

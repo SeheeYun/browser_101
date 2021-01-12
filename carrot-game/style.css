@@ -1,0 +1,116 @@
+:root {
+  --button-border: 3px solid;
+  --button-radius: 10px;
+  --button-width: 50px;
+  --button-height: 50px;
+}
+button {
+  outline-style: none;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.1);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: black;
+}
+
+.container {
+  width: 900px;
+  height: 500px;
+  margin: 80px auto;
+  padding: 10px;
+  background: url('/img/background.png') no-repeat center;
+  background-size: cover;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.play {
+  width: var(--button-width);
+  height: var(--button-height);
+  border: var(--button-border);
+  border-radius: var(--button-radius);
+  background-color: coral;
+  font-size: 24px;
+}
+p {
+  text-align: center;
+  padding-top: 6px;
+  font-size: 30px;
+}
+.timer {
+  margin: 10px 0;
+  width: 110px;
+  text-align: center;
+  height: var(--button-height);
+  border: var(--button-border);
+  border-radius: var(--button-radius);
+  background-color: honeydew;
+}
+.count_carrot {
+  width: var(--button-width);
+  height: var(--button-height);
+  border: var(--button-border) black;
+  border-radius: 50%;
+  background-color: coral;
+  color: white;
+}
+.ground {
+  position: relative;
+  margin-top: 42px;
+  height: 55%;
+  width: 100%;
+  overflow: hidden;
+}
+img:hover {
+  cursor: pointer;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 350px;
+  display: none;
+}
+.modal_box {
+  width: 300px;
+  height: 120px;
+  margin: auto;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  background-color: #00000080;
+  padding-top: 2px;
+}
+.visible {
+  display: block;
+}
+
+.replay {
+  width: var(--button-width);
+  height: var(--button-height);
+  border: var(--button-border);
+  border-radius: var(--button-radius);
+  background-color: white;
+  font-size: 24px;
+  display: block;
+  margin: 10px auto;
+}
+
+img {
+  position: absolute;
+}

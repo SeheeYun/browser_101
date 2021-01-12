@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: black;
+      }
+      ul {
+        margin: 0 auto;
+        width: 140px;
+      }
+      li {
+        background: url("img/carrot.png") no-repeat;
+        background-size: contain;
+        background-position: center;
+        list-style: none;
+        width: 100%;
+        height: 160px;
+      }
+      .btn {
+        display: block;
+        margin: 20px auto;
+        background-color: coral;
+      }
+      li.rabbit {
+        background: url("img/rabbit.png") no-repeat;
+        background-size: contain;
+        background-position: center;
+        list-style: none;
+        width: 100%;
+        height: 160px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">🐰Find a Rabbit🐰</button>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li class="rabbit"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <script>
+      const btn = document.querySelector(".btn");
+      btn.addEventListener("click", () => {
+        const rabbit = document.querySelector(".rabbit");
+        rabbit.scrollIntoView(true);
+        window.scrollBy({
+          top: -350,
+        });
+      });
+    </script>
+  </body>
+</html>
