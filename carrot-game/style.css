@@ -19,6 +19,9 @@ button:hover {
 body {
   background-color: black;
 }
+ul {
+  list-style: none;
+}
 
 .container {
   width: 900px;
@@ -82,24 +85,24 @@ img:hover {
   position: fixed;
   left: 0;
   top: 0;
-  padding-top: 350px;
+  padding-top: 300px;
   display: none;
 }
 .modal_box {
   width: 300px;
-  height: 120px;
   margin: auto;
   border-radius: 15px;
-  text-align: center;
-  font-size: 30px;
   color: white;
-  background-color: #00000080;
-  padding-top: 2px;
+  background-color: #00000090;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.visible {
-  display: block;
+.modal_text {
+  font-size: 30px;
+  font-weight: bold;
 }
-
 .replay {
   width: var(--button-width);
   height: var(--button-height);
@@ -107,8 +110,20 @@ img:hover {
   border-radius: var(--button-radius);
   background-color: white;
   font-size: 24px;
+}
+.record {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+}
+.record > li:nth-child(2) {
+  color: crimson;
+}
+.record span {
+  font-weight: normal;
+}
+.visible {
   display: block;
-  margin: 10px auto;
 }
 
 img {

@@ -37,6 +37,7 @@ function randomPositionItems(a) {
 // 플레이 버튼을 누르면,
 let time;
 let intervID;
+let start;
 const leftTime = document.querySelector('.timer');
 const playBtn = document.querySelector('.play');
 const replayBtn = document.querySelector('.replay');
@@ -44,9 +45,10 @@ playBtn.addEventListener('click', startGame);
 replayBtn.addEventListener('click', startGame);
 
 function startGame() {
+  // 초기화
   bgm.play();
   bgm.currentTime = 0;
-  // 초기화
+  start = Date.now();
   clearInterval(intervID);
   playBtn.style.visibility = 'visible';
   leftTime.innerHTML = `00:10`;
@@ -90,14 +92,25 @@ function setupTimer() {
 
 // 당근의 개수 표시 & 클릭 이벤트
 const carrotNum = document.querySelector('.count_carrot');
+const recordArr = [];
 ground.addEventListener('click', e => {
-  let carrots = document.querySelectorAll('.carrot');
+  const carrots = document.querySelectorAll('.carrot');
   if (e.target.className === 'carrot') {
     carrotBgm.play();
     carrotBgm.currentTime = 0;
     e.target.remove();
     carrotNum.innerHTML = `${carrots.length - 1}`;
     if (carrots.length - 1 < 1) {
+      let end = Date.now();
+      let elapsedTime = end - start;
+      const myRecord = document.querySelector('.my_record');
+      myRecord.innerHTML = `${elapsedTime / 1000} 초`;
+
+      recordArr.push(elapsedTime / 1000);
+      const bestRecordTime = Math.min.apply(null, recordArr);
+      const bestRecord = document.querySelector('.best_record');
+      bestRecord.innerHTML = `${bestRecordTime} 초`;
+
       bgm.pause();
       wonBgm.play();
       let msg = `🏆 YOU WON 🏆`;
