@@ -1,8 +1,6 @@
 'use strict';
-const mainBgm = new Audio('sound/bg.mp3');
-const carrotBgm = new Audio('sound/carrot_pull.mp3');
-const wonBgm = new Audio('sound/game_win.mp3');
-const lostBgm = new Audio('sound/alert.wav');
+import Modal from './modal.js';
+import * as sound from './sound.js';
 
 const CARROT_COUNT = 10;
 const BUG_COUNT = 7;
@@ -12,27 +10,26 @@ let intervID;
 let start;
 let score;
 const leftTime = document.querySelector('.timer');
-const ground = document.querySelector('.ground');
+const field = document.querySelector('.field');
 const playBtn = document.querySelector('.play');
-const replayBtn = document.querySelector('.replay');
 const carrotNum = document.querySelector('.count_carrot');
 const recordArr = [];
 playBtn.addEventListener('click', startGame);
-replayBtn.addEventListener('click', startGame);
+const gameFinishBanner = new Modal();
+gameFinishBanner.setClickListener(() => {
+  startGame();
+});
 
 function startGame() {
   // 초기화
-  playBgm(mainBgm);
+  sound.playMain();
   clearInterval(intervID);
   start = Date.now();
   score = 0;
-  ground.innerHTML = '';
+  field.innerHTML = '';
   leftTime.innerHTML = '00:10';
   leftTime.style.background = 'white';
-  playBtn.style.visibility = 'visible';
-  modal.classList.remove('visible');
 
-  // 당근과 벌레를 생성
   addItems('carrot', CARROT_COUNT, 'img/carrot.png');
   addItems('bug', BUG_COUNT, 'img/bug.png');
   carrotNum.innerHTML = CARROT_COUNT;
@@ -53,9 +50,9 @@ function setupTimer() {
   }, 1000);
 }
 
-ground.addEventListener('click', e => {
+field.addEventListener('click', e => {
   if (e.target.className === 'carrot') {
-    playBgm(carrotBgm);
+    sound.playCarrot();
     e.target.remove();
     score++;
     carrotNum.innerHTML = `${CARROT_COUNT - score}`;
@@ -68,15 +65,6 @@ ground.addEventListener('click', e => {
   }
 });
 
-// modal
-const modal = document.querySelector('.modal');
-const modalText = document.querySelector('.modal_text');
-function showModal(msg) {
-  playBtn.style.visibility = 'hidden';
-  modal.classList.add('visible');
-  modalText.innerHTML = msg;
-}
-
 function addItems(className, count, imgPath) {
   for (let i = 0; i < count; i++) {
     let randomX = randomIntGenerator(0, 800);
@@ -87,7 +75,7 @@ function addItems(className, count, imgPath) {
     item.setAttribute('class', className);
     item.setAttribute('draggable', 'false');
     item.style.transform = `translate(${randomX}px,${randomY}px)`;
-    ground.appendChild(item);
+    field.appendChild(item);
   }
 }
 
@@ -97,20 +85,15 @@ function randomIntGenerator(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function playBgm(bgm) {
-  bgm.play();
-  bgm.currentTime = 0;
-}
-
 function finishGame(win) {
   clearInterval(intervID);
-  mainBgm.pause();
+  sound.pauseMain();
   if (win) {
-    playBgm(wonBgm);
+    sound.playWon();
   } else {
-    playBgm(lostBgm);
+    sound.playLost();
   }
-  showModal(win ? '🏆 YOU WON 🏆' : '💩 YOU LOST 💩');
+  gameFinishBanner.show(win ? '🏆 YOU WON 🏆' : '💩 YOU LOST 💩');
 }
 
 function elapsedTime() {
