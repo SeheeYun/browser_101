@@ -1,11 +1,16 @@
 'use strict';
 import Modal from './modal.js';
-import Game from './game.js';
+import { GameBuilder, Reason } from './game.js';
 
-const game = new Game(10, 10, 7);
-game.setGamefinishListener(e => {
+const game = new GameBuilder()
+  .withGameDuration(10)
+  .withCarrotCount(10)
+  .withBugCount(7)
+  .build();
+
+game.setGamefinishListener(reason => {
   let msg;
-  e === 'win' ? (msg = '🏆 YOU WON 🏆') : (msg = '💩 YOU LOST 💩');
+  reason === Reason.win ? (msg = '🏆 YOU WON 🏆') : (msg = '💩 YOU LOST 💩');
   gameFinishBanner.show(msg);
 });
 

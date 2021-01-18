@@ -1,8 +1,39 @@
 import Record from './record.js';
-import Field from './filed.js';
+import { Field, ItemType } from './filed.js';
 import * as sound from './sound.js';
 
-export default class Game {
+export const Reason = Object.freeze({
+  win: 'win',
+  lose: 'lose',
+});
+
+// Builder Pattern
+export class GameBuilder {
+  withGameDuration(duration) {
+    this.gameDuration = duration;
+    return this;
+  }
+
+  withCarrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+
+  withBugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  build() {
+    return new Game(
+      this.gameDuration, //
+      this.carrotCount,
+      this.bugCount
+    );
+  }
+}
+
+class Game {
   constructor(gameDuration, carrotCount, bugCount) {
     this.gameDuration = gameDuration;
     this.carrotCount = carrotCount;
@@ -11,11 +42,9 @@ export default class Game {
     this.intervID;
     this.score;
     this.leftTime = document.querySelector('.timer');
-    this.playBtn = document.querySelector('.play');
-
-    this.playBtn.addEventListener('click', this.start);
-
     this.carrotNum = document.querySelector('.count_carrot');
+    this.playBtn = document.querySelector('.play');
+    this.playBtn.addEventListener('click', this.start);
 
     this.gameField = new Field(carrotCount, bugCount);
     this.gameField.setClickListener(this.onItemClick);
@@ -48,19 +77,18 @@ export default class Game {
     } else {
       sound.playLost();
     }
-    this.onGameFinish && this.onGameFinish(win ? 'win' : 'lose');
-    // .show(win ? '🏆 YOU WON 🏆' : '💩 YOU LOST 💩');
+    this.onGameFinish && this.onGameFinish(win ? Reason.win : Reason.lose);
   }
 
   onItemClick = item => {
-    if (item === 'carrot') {
+    if (item === ItemType.carrot) {
       this.score++;
       this.carrotNum.innerHTML = `${this.carrotCount - this.score}`;
       if (this.score === this.carrotCount) {
         this.record.elapsedTime();
         this.finish(true);
       }
-    } else if (item === 'bug') {
+    } else if (item === ItemType.bug) {
       this.finish(false);
     }
   };
