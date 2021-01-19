@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        font-size: 10vh;
+      }
+      button:hover {
+        background-color: mediumaquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Continue with setTimeout</button>
+    <script>
+      function handleClick() {
+        console.log('handleClick');
+        setTimeout(() => {
+          console.log('setTimeout');
+          handleClick();
+        }, 0);
+      }
+      const button = document.querySelector('button');
+      button.addEventListener('click', () => {
+        handleClick();
+      });
+    </script>
+  </body>
+</html>

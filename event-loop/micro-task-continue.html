@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        font-size: 10vh;
+      }
+      button:hover {
+        background-color: mediumaquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Continue with promise</button>
+    <script>
+      function handleClick() {
+        console.log('handleClick');
+        Promise.resolve(0) //
+          .then(() => {
+            console.log('then');
+            handleClick();
+          });
+      }
+      const button = document.querySelector('button');
+      button.addEventListener('click', () => {
+        handleClick();
+      });
+    </script>
+  </body>
+</html>

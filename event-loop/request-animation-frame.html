@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        font-size: 10vh;
+      }
+      button:hover {
+        background-color: mediumaquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <button>RequestAnimationFrame</button>
+    <script>
+      const button = document.querySelector('button');
+      button.addEventListener('click', () => {
+        requestAnimationFrame(() => {
+          document.body.style.backgroundColor = 'beige';
+        });
+        requestAnimationFrame(() => {
+          document.body.style.backgroundColor = 'orange';
+        });
+        requestAnimationFrame(() => {
+          document.body.style.backgroundColor = 'red';
+        });
+        setTimeout(() => {
+          //
+        }, 0);
+      });
+    </script>
+  </body>
+</html>
